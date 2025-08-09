@@ -73,11 +73,12 @@
                 <div class="col-md-6">
                   <label class="form-label" for="modelo">Modelo de apartamento</label>
                   <select class="form-select" id="modelo" name="modelo" required>
-                    <option value="" selected disabled>Seleccioná un modelo…</option>
-                    {% for m in modelos %}
-                      <option value="{{ m }}">{{ m }}</option>
-                    {% endfor %}
-                  </select>
+  <option value="" selected disabled>Seleccioná un modelo…</option>
+  {% for m in modelos %}
+    <option value="{{ m }}">{{ m }}</option>
+  {% endfor %}
+</select>
+
                   <div class="invalid-feedback">Seleccioná un modelo.</div>
                 </div>
 
