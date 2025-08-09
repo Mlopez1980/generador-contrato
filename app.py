@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, send_file
-from generador import generar_contrato_desde_formulario
+from generador import generar_contrato_desde_formulario, MODELOS  # ⬅️ importá MODELOS
 
 app = Flask(__name__)
 
@@ -23,7 +23,6 @@ def index():
         nombre_archivo = generar_contrato_desde_formulario(datos)
         return send_file(nombre_archivo, as_attachment=True)
 
-    return render_template("formulario.html")
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000, debug=True)
+    # ⬇️ Pasamos los modelos ordenados al template
+    modelos = sorted(MODELOS.keys())
+    return render_template("formulario.html", modelos=modelos)
