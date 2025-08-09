@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, send_file
-from generador import generar_contrato_desde_formulario, MODELOS  # ⬅️ IMPORTA MODELOS
+from generador import generar_contrato_desde_formulario  # sin MODELOS por ahora (Plan B)
 
 app = Flask(__name__)
 
@@ -23,9 +23,11 @@ def index():
         nombre_archivo = generar_contrato_desde_formulario(datos)
         return send_file(nombre_archivo, as_attachment=True)
 
-    # 🔒 Lista fija para probar el frontend
+    # ✅ Lista fija SIEMPRE definida (Plan B)
     modelos = ["1E","2D","2E","2F","3C","3E","3F","4D","4E","4F","5C","5E","5F"]
+    print("Modelos enviados al template:", len(modelos))  # para ver en logs de Render
     return render_template("formulario.html", modelos=modelos)
 
-print("Modelos enviados al template:", len(modelos))
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000, debug=True)
 
