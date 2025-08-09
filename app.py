@@ -27,4 +27,5 @@ def index():
     modelos = ["1E","2D","2E","2F","3C","3E","3F","4D","4E","4F","5C","5E","5F"]
     return render_template("formulario.html", modelos=modelos)
 
+print("Modelos enviados al template:", len(modelos))
 
