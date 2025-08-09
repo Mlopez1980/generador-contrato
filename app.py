@@ -23,6 +23,8 @@ def index():
         nombre_archivo = generar_contrato_desde_formulario(datos)
         return send_file(nombre_archivo, as_attachment=True)
 
-    modelos = sorted(MODELOS.keys())              # ⬅️ OBTENEMOS LAS CLAVES
-    return render_template("formulario.html", modelos=modelos)  # ⬅️ LAS ENVIAMOS
+    # 🔒 Lista fija para probar el frontend
+    modelos = ["1E","2D","2E","2F","3C","3E","3F","4D","4E","4F","5C","5E","5F"]
+    return render_template("formulario.html", modelos=modelos)
+
 
