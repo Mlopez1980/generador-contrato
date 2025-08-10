@@ -4,13 +4,13 @@ import os
 
 app = Flask(__name__)
 
-# Apartamentos vendidos (no disponibles)
+# 👉 Marcá aquí los modelos vendidos (no disponibles)
 NO_DISPONIBLES = {
-    "1A", "1B", "1C", "1D", "1F",
-    "2A", "2B", "2C",
-    "3A", "3B", "3D",
-    "4A", "4B", "4C",
-    "5A", "5B", "5D",
+    "1A","1B","1C","1D","1F",
+    "2A","2B","2C",
+    "3A","3B","3D",
+    "4A","4B","4C",
+    "5A","5B","5D",
 }
 
 @app.route("/", methods=["GET", "POST"])
@@ -33,21 +33,15 @@ def index():
         nombre_archivo = generar_contrato_desde_formulario(datos)
         return send_file(nombre_archivo, as_attachment=True)
 
-    # Para el selector: vendidos arriba (gris), disponibles abajo
-    todos = sorted(MODELOS.keys())
-    vendidos = sorted([m for m in todos if m in NO_DISPONIBLES])
-    disponibles = [m for m in todos if m not in NO_DISPONIBLES]
-
+    # ✅ Variables que usa el template
+    modelos_todos = sorted(MODELOS.keys())
     return render_template(
         "formulario.html",
-        vendidos=vendidos,
-        disponibles=disponibles,
+        modelos_todos=modelos_todos,
+        no_disponibles=NO_DISPONIBLES,
     )
 
 if __name__ == "__main__":
+    # Render usa la variable de entorno PORT
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port, debug=True)
-
-if __name__ == "__main__":
-    app.run(debug=True)
-
