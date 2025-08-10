@@ -5,18 +5,35 @@ from num2words import num2words
 PLANTILLA = "plantilla_promesa_marcadores.docx"
 
 MODELOS = {
+    "1A": {"area": 82.95, "habitaciones": "2", "ubicacion": "primer nivel de apartamentos, segundo nivel del edificio"},
+    "1B": {"area": 81.75, "habitaciones": "2", "ubicacion": "primer nivel de apartamentos, segundo nivel del edificio"},
+    "1C": {"area": 45.997, "habitaciones": "1", "ubicacion": "primer nivel de apartamentos, segundo nivel del edificio"},
+    "1D": {"area": 82.79, "habitaciones": "2", "ubicacion": "primer nivel de apartamentos, segundo nivel del edificio"},
     "1E": {"area": 82.79, "habitaciones": "2", "ubicacion": "primer nivel de apartamentos, segundo nivel del edificio"},
+    "2A": {"area": 82.95, "habitaciones": "2", "ubicacion": "segundo nivel de apartamentos, tercer nivel del edificio"},
+    "2B": {"area": 81.75, "habitaciones": "2", "ubicacion": "segundo nivel de apartamentos, tercer nivel del edificio"},
+    "2C": {"area": 45.997, "habitaciones": "1", "ubicacion": "segundo nivel de apartamentos, tercer nivel del edificio"},
     "2D": {"area": 82.79, "habitaciones": "2", "ubicacion": "segundo nivel de apartamentos, tercer nivel del edificio"},
     "2E": {"area": 82.79, "habitaciones": "2", "ubicacion": "segundo nivel de apartamentos, tercer nivel del edificio"},
     "2F": {"area": 44.55, "habitaciones": "1", "ubicacion": "segundo nivel de apartamentos, tercer nivel del edificio"},
+    "3A": {"area": 82.95, "habitaciones": "2", "ubicacion": "tercer nivel de apartamentos, cuarto nivel del edificio"},
+    "3B": {"area": 81.75, "habitaciones": "2", "ubicacion": "tercer nivel de apartamentos, cuarto nivel del edificio"},
     "3C": {"area": 45.997, "habitaciones": "1", "ubicacion": "tercer nivel de apartamentos, cuarto nivel del edificio"},
+    "3D": {"area": 82.79, "habitaciones": "2", "ubicacion": "tercer nivel de apartamentos, cuarto nivel del edificio"},
     "3E": {"area": 82.79, "habitaciones": "2", "ubicacion": "tercer nivel de apartamentos, cuarto nivel del edificio"},
     "3F": {"area": 44.55, "habitaciones": "1", "ubicacion": "tercer nivel de apartamentos, cuarto nivel del edificio"},
+    "4A": {"area": 82.95, "habitaciones": "2", "ubicacion": "cuarto nivel de apartamentos, quinto nivel del edificio"},
+    "4B": {"area": 81.75, "habitaciones": "2", "ubicacion": "cuarto nivel de apartamentos, quinto nivel del edificio"},
+    "4C": {"area": 45.997, "habitaciones": "1", "ubicacion": "cuarto nivel de apartamentos, quinto nivel del edificio"},
     "4D": {"area": 82.79, "habitaciones": "2", "ubicacion": "cuarto nivel de apartamentos, quinto nivel del edificio"},
     "4E": {"area": 82.79, "habitaciones": "2", "ubicacion": "cuarto nivel de apartamentos, quinto nivel del edificio"},
     "4F": {"area": 44.55, "habitaciones": "1", "ubicacion": "cuarto nivel de apartamentos, quinto nivel del edificio"},
+    "5A": {"area": 82.95, "habitaciones": "2", "ubicacion": "quinto nivel de apartamentos, sexto nivel del edificio"},
+    "5B": {"area": 81.75, "habitaciones": "2", "ubicacion": "quinto nivel de apartamentos, sexto nivel del edificio"},
     "5C": {"area": 45.997, "habitaciones": "1", "ubicacion": "quinto nivel de apartamentos, sexto nivel del edificio"},
-    "5E": {"area": 82.79, "habitaciones": "2", "ubicacion": "quinto nivel de apartamentos, sexto nivel del edificio"},
+    "5C": {"area": 45.997, "habitaciones": "1", "ubicacion": "quinto nivel de apartamentos, sexto nivel del edificio"},
+    "5D": {"area": 82.79, "habitaciones": "2", "ubicacion": "quinto nivel de apartamentos, sexto nivel del edificio"},
+    "5E": {"area": 82.79, "habitaciones": "1", "ubicacion": "quinto nivel de apartamentos, sexto nivel del edificio"},
     "5F": {"area": 44.55, "habitaciones": "1", "ubicacion": "quinto nivel de apartamentos, sexto nivel del edificio"}
 }
 
