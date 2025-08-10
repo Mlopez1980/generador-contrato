@@ -2,71 +2,123 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Generador de Contrato</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Contratos</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; }
-        h1 { text-align: center; color: #333; }
-        form { max-width: 500px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        label { font-weight: bold; display: block; margin-top: 15px; }
-        input, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
-        button { background: #4CAF50; color: white; padding: 10px; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer; width: 100%; }
-        button:hover { background: #45a049; }
-        option.disabled { color: gray; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        }
+        header img {
+            max-height: 100px;
+        }
+        header h1 {
+            margin: 10px 0 0 0;
+            color: #333;
+        }
+        form {
+            max-width: 700px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 12px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        option:disabled {
+            background-color: #ccc;
+            color: white;
+        }
     </style>
 </head>
 <body>
-    <h1>Generador de Contrato</h1>
-    <form method="POST">
-        <label>Nombre completo</label>
-        <input type="text" name="nombre" required>
 
-        <label>DNI</label>
-        <input type="text" name="dni" required>
+<header>
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo Empresa">
+    <h1>Generador de Contratos</h1>
+</header>
 
-        <label>Estado civil</label>
-        <input type="text" name="estado_civil" required>
+<form method="POST" action="/">
+    <label>Nombre completo</label>
+    <input type="text" name="nombre" required>
 
-        <label>Profesión</label>
-        <input type="text" name="profesion" required>
+    <label>DNI</label>
+    <input type="text" name="dni" required>
 
-        <label>Fecha del contrato</label>
-        <input type="date" name="fecha">
+    <label>Estado civil</label>
+    <input type="text" name="estado_civil" required>
 
-        <label>Precio del apartamento (USD)</label>
-        <input type="text" name="precio" required>
+    <label>Profesión</label>
+    <input type="text" name="profesion" required>
 
-        <label>Modelo de apartamento</label>
-        <select class="form-select" id="modelo" name="modelo" required>
-  <optgroup label="No disponibles">
-    {% for modelo in vendidos %}
-      <option value="{{ modelo }}" disabled style="color:#6c757d">{{ modelo }} (VENDIDO)</option>
-    {% endfor %}
-  </optgroup>
-  <optgroup label="Disponibles">
-    {% for modelo in disponibles %}
-      <option value="{{ modelo }}">{{ modelo }}</option>
-    {% endfor %}
-  </optgroup>
-</select>
+    <label>Fecha del contrato</label>
+    <input type="date" name="fecha">
 
+    <label>Precio del apartamento (USD)</label>
+    <input type="text" name="precio" required>
 
+    <label>Modelo de apartamento</label>
+    <select name="modelo" required>
+        {% for modelo in modelos_todos %}
+            {% if modelo in no_disponibles %}
+                <option value="{{ modelo }}" disabled>{{ modelo }} (Vendido)</option>
+            {% else %}
+                <option value="{{ modelo }}">{{ modelo }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
 
-        <label>Monto de reserva (USD)</label>
-        <input type="text" name="monto_reserva" required>
+    <label>Monto de reserva (USD)</label>
+    <input type="text" name="monto_reserva" required>
 
-        <label>Fecha de reserva</label>
-        <input type="date" name="fecha_reserva">
+    <label>Fecha de reserva</label>
+    <input type="date" name="fecha_reserva" required>
 
-        <label>Complemento de prima (USD)</label>
-        <input type="text" name="complemento_prima" required>
+    <label>Complemento de prima (USD)</label>
+    <input type="text" name="complemento_prima" required>
 
-        <label>Fecha del complemento</label>
-        <input type="date" name="fecha_complemento">
+    <label>Fecha del complemento</label>
+    <input type="date" name="fecha_complemento" required>
 
-        <label>Tercer pago (USD)</label>
-        <input type="text" name="tercer_pago" required>
+    <label>Tercer pago (USD)</label>
+    <input type="text" name="tercer_pago" required>
 
-        <button type="submit">Generar Contrato</button>
-    </form>
+    <button type="submit" class="btn">Generar Contrato</button>
+</form>
+
 </body>
 </html>
