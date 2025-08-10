@@ -1,157 +1,67 @@
-<!doctype html>
-<html lang="es" data-bs-theme="light">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Generador de Contratos</title>
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body { background: #f6f7fb; }
-    .brand { font-weight: 700; letter-spacing: .3px; }
-    .card { border: none; border-radius: 1rem; box-shadow: 0 10px 25px rgba(0,0,0,.06); }
-    .form-label { font-weight: 600; }
-    .helper { font-size: .875rem; color: #6c757d; }
-  </style>
+    <meta charset="UTF-8">
+    <title>Generador de Contrato</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; }
+        h1 { text-align: center; color: #333; }
+        form { max-width: 500px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        label { font-weight: bold; display: block; margin-top: 15px; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
+        button { background: #4CAF50; color: white; padding: 10px; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer; width: 100%; }
+        button:hover { background: #45a049; }
+        option.disabled { color: gray; }
+    </style>
 </head>
 <body>
-  <!-- Header -->
-  <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
-    <div class="container">
-      <a class="navbar-brand brand" href="#">Generador de Contratos</a>
-    </div>
-  </nav>
+    <h1>Generador de Contrato</h1>
+    <form method="POST">
+        <label>Nombre completo</label>
+        <input type="text" name="nombre" required>
 
-  <!-- Main -->
-  <div class="container py-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-9 col-xl-8">
-        <div class="card">
-          <div class="card-body p-4 p-sm-5">
-            <h1 class="h4 mb-1">Datos del contrato</h1>
-            <p class="text-muted mb-4">Completa el formulario y descarga el documento Word.</p>
+        <label>DNI</label>
+        <input type="text" name="dni" required>
 
-            <form method="post" novalidate class="needs-validation" id="form-contrato">
+        <label>Estado civil</label>
+        <input type="text" name="estado_civil" required>
 
-              <!-- Datos del cliente -->
-              <div class="row g-3">
-                <div class="col-md-8">
-                  <label class="form-label" for="nombre">Nombre completo</label>
-                  <input class="form-control" id="nombre" name="nombre" type="text" required>
-                  <div class="invalid-feedback">Ingresá el nombre completo.</div>
-                </div>
+        <label>Profesión</label>
+        <input type="text" name="profesion" required>
 
-                <div class="col-md-4">
-                  <label class="form-label" for="dni">DNI</label>
-                  <input class="form-control" id="dni" name="dni" type="text" required>
-                  <div class="invalid-feedback">Ingresá el DNI.</div>
-                </div>
+        <label>Fecha del contrato</label>
+        <input type="date" name="fecha">
 
-                <div class="col-md-6">
-                  <label class="form-label" for="estado_civil">Estado civil</label>
-                  <input class="form-control" id="estado_civil" name="estado_civil" type="text" required>
-                  <div class="invalid-feedback">Ingresá el estado civil.</div>
-                </div>
+        <label>Precio del apartamento (USD)</label>
+        <input type="text" name="precio" required>
 
-                <div class="col-md-6">
-                  <label class="form-label" for="profesion">Profesión</label>
-                  <input class="form-control" id="profesion" name="profesion" type="text" required>
-                  <div class="invalid-feedback">Ingresá la profesión.</div>
-                </div>
+        <label>Modelo de apartamento</label>
+        <select name="modelo" required>
+            {% for modelo in modelos_todos %}
+                {% if modelo in no_disponibles %}
+                    <option value="{{ modelo }}" disabled class="disabled">{{ modelo }} (VENDIDO)</option>
+                {% else %}
+                    <option value="{{ modelo }}">{{ modelo }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
 
-                <div class="col-md-4">
-                  <label class="form-label" for="fecha">Fecha del contrato</label>
-                  <input class="form-control" id="fecha" name="fecha" type="date">
-                  <div class="helper">Si la dejás vacía, se usa la fecha de hoy.</div>
-                </div>
-              </div>
+        <label>Monto de reserva (USD)</label>
+        <input type="text" name="monto_reserva" required>
 
-              <hr class="my-4">
+        <label>Fecha de reserva</label>
+        <input type="date" name="fecha_reserva">
 
-              <!-- Propiedad -->
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <label class="form-label" for="modelo">Modelo de apartamento</label>
-                  <select class="form-select" id="modelo" name="modelo" required>
-  <option value="" selected disabled>Seleccioná un modelo…</option>
-  {% for m in modelos %}
-    <option value="{{ m }}">{{ m }}</option>
-  {% endfor %}
-</select>
+        <label>Complemento de prima (USD)</label>
+        <input type="text" name="complemento_prima" required>
 
-                  <div class="invalid-feedback">Seleccioná un modelo.</div>
-                </div>
+        <label>Fecha del complemento</label>
+        <input type="date" name="fecha_complemento">
 
-                <div class="col-md-6">
-                  <label class="form-label" for="precio">Precio del apartamento (USD)</label>
-                  <input class="form-control" id="precio" name="precio" type="text" inputmode="decimal" placeholder="Ej: 200,000.00" required>
-                  <div class="helper">Acepta comas y decimales; se formatea automáticamente.</div>
-                  <div class="invalid-feedback">Ingresá el precio.</div>
-                </div>
-              </div>
+        <label>Tercer pago (USD)</label>
+        <input type="text" name="tercer_pago" required>
 
-              <hr class="my-4">
-
-              <!-- Pagos -->
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <label class="form-label" for="monto_reserva">Monto de reserva (USD)</label>
-                  <input class="form-control" id="monto_reserva" name="monto_reserva" type="text" inputmode="decimal" placeholder="Ej: 2,500.00" required>
-                  <div class="invalid-feedback">Ingresá el monto de reserva.</div>
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label" for="fecha_reserva">Fecha de reserva</label>
-                  <input class="form-control" id="fecha_reserva" name="fecha_reserva" type="date">
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label" for="complemento_prima">Complemento de prima (USD)</label>
-                  <input class="form-control" id="complemento_prima" name="complemento_prima" type="text" inputmode="decimal" placeholder="Ej: 7,500.00" required>
-                  <div class="invalid-feedback">Ingresá el complemento de prima.</div>
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label" for="fecha_complemento">Fecha complemento de prima</label>
-                  <input class="form-control" id="fecha_complemento" name="fecha_complemento" type="date">
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label" for="tercer_pago">Tercer pago (USD)</label>
-                  <input class="form-control" id="tercer_pago" name="tercer_pago" type="text" inputmode="decimal" placeholder="Ej: 15,000.00" required>
-                  <div class="invalid-feedback">Ingresá el tercer pago.</div>
-                </div>
-              </div>
-
-              <div class="d-grid mt-4">
-                <button class="btn btn-primary btn-lg" type="submit">Generar contrato</button>
-              </div>
-            </form>
-
-          </div>
-        </div>
-
-        <p class="text-center text-muted mt-4 mb-0">
-          © {{ 2025 }} — Generador de Contratos
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bootstrap JS (validaciones simples) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Validación nativa de Bootstrap
-    (() => {
-      const form = document.getElementById('form-contrato');
-      form.addEventListener('submit', (e) => {
-        if (!form.checkValidity()) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      });
-    })();
-  </script>
+        <button type="submit">Generar Contrato</button>
+    </form>
 </body>
 </html>
