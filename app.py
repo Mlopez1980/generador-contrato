@@ -31,7 +31,12 @@ def index():
     # Filtra automáticamente los modelos disponibles
     modelos_disponibles = [m for m in MODELOS.keys() if m not in NO_DISPONIBLES]
 
-    return render_template("formulario.html", modelos=modelos_disponibles)
+    return render_template(
+    "formulario.html",
+    modelos_todos=list(MODELOS.keys()),
+    no_disponibles=NO_DISPONIBLES
+)
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
