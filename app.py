@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # Lista de modelos que ya NO están disponibles
-NO_DISPONIBLES = ["3C", "4E"]  # <-- Aquí pones los vendidos
+NO_DISPONIBLES = ["1A", "1B", "1C", "1D", "1F", "2A", "2B", "2C", "3A", "3B", "3D", "4A", "4B", "4C", "5A", "5B", "5D" ]  # <-- Aquí pones los vendidos
 
 @app.route("/", methods=["GET", "POST"])
 def index():
