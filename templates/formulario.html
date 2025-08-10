@@ -36,15 +36,17 @@
         <input type="text" name="precio" required>
 
         <label>Modelo de apartamento</label>
-        <select name="modelo" required>
-            {% for modelo in modelos_todos %}
-                {% if modelo in no_disponibles %}
-                    <option value="{{ modelo }}" disabled class="disabled">{{ modelo }} (VENDIDO)</option>
-                {% else %}
-                    <option value="{{ modelo }}">{{ modelo }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
+        <select class="form-select" id="modelo" name="modelo" required>
+  <option value="" selected disabled>Seleccioná un modelo…</option>
+  {% for m in modelos_todos %}
+    {% if m in no_disponibles %}
+      <option value="{{ m }}" disabled style="color:#6c757d">{{ m }} (VENDIDO)</option>
+    {% else %}
+      <option value="{{ m }}">{{ m }}</option>
+    {% endif %}
+  {% endfor %}
+</select>
+
 
         <label>Monto de reserva (USD)</label>
         <input type="text" name="monto_reserva" required>
