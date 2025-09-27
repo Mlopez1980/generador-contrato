@@ -7,7 +7,7 @@ app = Flask(__name__)
 # 👉 Marcá aquí los modelos vendidos (no disponibles)
 NO_DISPONIBLES = {
     "1A","1B","1D","1F",
-    "2A","2B","2C",2F
+    "2A","2B","2C","2F",
     "3A","3B","3D",
     "4A","4B","4C",
     "5A","5B","5D",
