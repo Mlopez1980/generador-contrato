@@ -6,11 +6,11 @@ app = Flask(__name__)
 
 # 👉 Marcá aquí los modelos vendidos (no disponibles)
 NO_DISPONIBLES = {
-    "1A","1B","1F",
-    "2A","2B","2C","2F",
-    "3A","3B",
-    "4A","4C",
-    "5A","5B","5D",
+    "1A","1B","1C","1D","1F",
+    "2B","2D","2F",
+    "3A","3B","3D","3F"
+    "4A","4B","4C",
+    "5A","5B","5D","5F"
 }
 
 @app.route("/", methods=["GET", "POST"])
