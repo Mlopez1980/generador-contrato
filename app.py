@@ -20,6 +20,7 @@ def index():
             "NOMBRE": request.form["nombre"],
             "DNI": request.form["dni"],
             "ESTADO_CIVIL": request.form["estado_civil"],
+            "NACIONALIDAD": request.form["nacionalidad"],
             "PROFESION": request.form["profesion"],
             "FECHA": request.form["fecha"],
             "PRECIO": request.form["precio"],
