@@ -86,7 +86,7 @@ def fecha_contrato():
         "diciembre"
     ]
     return (
-        f"a los {num2words(hoy.day, lang='es')} "
+        f"{num2words(hoy.day, lang='es')} "
         f"({hoy.day}) días del mes de "
         f"{meses[hoy.month - 1]} de "
         f"{num2words(hoy.year, lang='es')} "
