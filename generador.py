@@ -126,6 +126,7 @@ def generar_contrato_desde_formulario(entrada):
         "NOMBRE": entrada["NOMBRE"],
         "DNI": entrada["DNI"],
         "ESTADO_CIVIL": entrada["ESTADO_CIVIL"],
+        "NACIONALIDAD": entrada["NACIONALIDAD"],
         "PROFESION": entrada["PROFESION"],
         "FECHA": formato_fecha(entrada["FECHA"]) if entrada["FECHA"] else datetime.now(ZoneInfo("America/Tegucigalpa")).strftime("%d/%m/%Y"),
         "FECHA_CONTRATO": fecha_contrato(),
