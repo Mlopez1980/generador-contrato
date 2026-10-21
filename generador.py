@@ -1,5 +1,6 @@
 from docx import Document
-from datetime import date
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from num2words import num2words
 
 PLANTILLA = "plantilla_promesa_marcadores.docx"
@@ -66,6 +67,34 @@ def monto_formato_numerico(monto):
     except:
         return monto
 
+
+def formato_fecha(fecha):
+    if not fecha:
+        return ""
+    try:
+        return datetime.strptime(fecha, "%Y-%m-%d").strftime("%d/%m/%Y")
+    except ValueError:
+        return fecha
+
+
+def fecha_contrato():
+    hoy = datetime.now(ZoneInfo("America/Tegucigalpa"))
+    meses = [
+        "enero", "febrero", "marzo", "abril",
+        "mayo", "junio", "julio", "agosto",
+        "septiembre", "octubre", "noviembre",
+        "diciembre"
+    ]
+    return (
+        f"a los {num2words(hoy.day, lang='es')} "
+        f"({hoy.day}) días del mes de "
+        f"{meses[hoy.month - 1]} de "
+        f"{num2words(hoy.year, lang='es')} "
+        f"({hoy.year})"
+    )
+
+
+
 def reemplazar_marcadores(documento, datos):
     for parrafo in documento.paragraphs:
         for clave, valor in datos.items():
@@ -98,7 +127,8 @@ def generar_contrato_desde_formulario(entrada):
         "DNI": entrada["DNI"],
         "ESTADO_CIVIL": entrada["ESTADO_CIVIL"],
         "PROFESION": entrada["PROFESION"],
-        "FECHA": entrada["FECHA"] or date.today().strftime("%d/%m/%Y"),
+        "FECHA": formato_fecha(entrada["FECHA"]) if entrada["FECHA"] else datetime.now(ZoneInfo("America/Tegucigalpa")).strftime("%d/%m/%Y"),
+        "FECHA_CONTRATO": fecha_contrato(),
         "PRECIO": precio,
         "PRECIO_TEXTO": monto_a_texto_dolares(entrada["PRECIO"]),
         "MODELO": modelo,
@@ -109,10 +139,10 @@ def generar_contrato_desde_formulario(entrada):
         "DESCRIPCION_HABITACIONES": descripcion,
         "MONTO_RESERVA": reserva,
         "MONTO_RESERVA_TEXTO": monto_a_texto_dolares(entrada["MONTO_RESERVA"]),
-        "FECHA_RESERVA": entrada["FECHA_RESERVA"],
+        "FECHA_RESERVA": formato_fecha(entrada["FECHA_RESERVA"]),
         "COMPLEMENTO_PRIMA": complemento,
         "COMPLEMENTO_PRIMA_TEXTO": monto_a_texto_dolares(entrada["COMPLEMENTO_PRIMA"]),
-        "FECHA_COMPLEMENTO": entrada["FECHA_COMPLEMENTO"],
+        "FECHA_COMPLEMENTO": formato_fecha(entrada["FECHA_COMPLEMENTO"]),
         "TERCER_PAGO": tercer_pago,
         "TERCER_PAGO_TEXTO": monto_a_texto_dolares(entrada["TERCER_PAGO"])
     }
